@@ -3,10 +3,10 @@ services:
   - docker
 
 before_install:
-  - docker build -t test1/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t ty/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run test1/react-test npm test -- --coverage
+  - docker run ty/react-test npm test -- --coverage
 
 after_success:
   - docker build -t markg/multi-client ./client
