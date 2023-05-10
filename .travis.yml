@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t tm/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t tmy/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run tm/react-test npm test -- --coverage
+  - docker run tmy/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t markg/multi-client ./client
-  - docker build -t markg/multi-nginx ./nginx
-  - docker build -t markg/multi-server ./server
-  - docker build -t markg/multi-worker ./worker
+  - docker build -t markgg/multi-client ./client
+  - docker build -t markgg/multi-nginx ./nginx
+  - docker build -t markgg/multi-server ./server
+  - docker build -t markgg/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #  push  images docker hub
-  - docker push markg/multi-client
-  - docker push markg/multi-nginx
-  - docker push markg/multi-server
-  - docker push markg/multi-worker
+  - docker push markgg/multi-client
+  - docker push markgg/multi-nginx
+  - docker push markgg/multi-server
+  - docker push markgg/multi-worker
