@@ -9,15 +9,15 @@ script:
   - docker run tmpr/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t markgaisinsky/markgg/multi-client ./client
-  - docker build -t markgaisinsky/markgg/multi-nginx ./nginx
-  - docker build -t markgaisinsky/markgg/multi-server ./server
-  - docker build -t markgaisinsky/markgg/multi-worker ./worker
+  - docker build -t markgaisinsky/multi-client ./client
+  - docker build -t markgaisinsky/multi-nginx ./nginx
+  - docker build -t markgaisinsky/multi-server ./server
+  - docker build -t markgaisinsky/multi-worker ./worker
    
   # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin docker.io
   #  push  images docker hub
-  - docker push markgaisinsky/markgg/multi-client:latest
-  - docker push markgaisinsky/markgg/multi-nginx:latest
-  - docker push markgaisinsky/markgg/multi-server:latest
-  - docker push markgaisinsky/markgg/multi-worker:latest
+  - docker push markgaisinsky/multi-client:latest
+  - docker push markgaisinsky/multi-nginx:latest
+  - docker push markgaisinsky/multi-server:latest
+  - docker push markgaisinsky/multi-worker:latest
