@@ -14,14 +14,14 @@ after_success:
   - docker build -t markgg/multi-server ./server
   - docker build -t markgg/multi-worker ./worker
    ###### adding tags to images
-  - docker tag markgg/multi-client multi-client:first
-  - docker tag markgg/multi-nginx  multi-nginx:first
-  - docker tag markgg/multi-server multi-server:first
-  - docker tag markgg/multi-worker multi-worker:first
+  - docker tag markgg/multi-client mark1:first
+  - docker tag markgg/multi-nginx  mark2:first
+  - docker tag markgg/multi-server mark3:first
+  - docker tag markgg/multi-worker mark4:first
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #  push  images docker hub
-  - docker push markgg/multi-client multi-client:first
-  - docker push markgg/multi-nginx  multi-nginx:first
-  - docker push markgg/multi-server multi-server:first
-  - docker push markgg/multi-worker multi-worker:first
+  - docker push markgg/multi-client:latest mark1:first
+  - docker push markgg/multi-nginx:latest  mark2:first
+  - docker push markgg/multi-server:latest mark3:first
+  - docker push markgg/multi-worker:latest mark4:first
