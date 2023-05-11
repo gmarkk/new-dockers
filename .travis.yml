@@ -9,10 +9,10 @@ script:
   - docker run tmpr/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t markgg/multi-client ./client
-  - docker build -t markgg/multi-nginx ./nginx
-  - docker build -t markgg/multi-server ./server
-  - docker build -t markgg/multi-worker ./worker
+  - docker build -t markgaisinsky/markgg/multi-client ./client
+  - docker build -t markgaisinsky/markgg/multi-nginx ./nginx
+  - docker build -t markgaisinsky/markgg/multi-server ./server
+  - docker build -t markgaisinsky/markgg/multi-worker ./worker
    
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
