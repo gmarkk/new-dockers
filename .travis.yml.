@@ -1,0 +1,30 @@
+before_install:
+  - docker build -t tmpr/react-test -f ./client/Dockerfile.dev ./client
+script:
+  - docker run tmpr/react-test npm test -- --coverage
+after_success:
+  - docker build -t markgaisinsky/multi-client ./client
+  - docker build -t markgaisinsky/multi-nginx ./nginx
+  - docker build -t markgaisinsky/multi-server ./server
+  - docker build -t markgaisinsky/multi-worker ./worker
+   
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin docker.io
+  #  push  images docker hub
+  - docker push markgaisinsky/multi-client:latest
+  - docker push markgaisinsky/multi-nginx:latest
+  - docker push markgaisinsky/multi-server:latest
+  - docker push markgaisinsky/multi-worker:latest
+deploy:
+  provider: elasticbeanstalk
+  region: us-west-1
+  app: multi-docker
+  env: MultiDocker-env
+  app: mydocker
+  env: Mydocker-env
+  bucket_name: elasticbeanstalk-us-east-1-428770810282
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
