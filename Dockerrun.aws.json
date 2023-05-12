@@ -1,0 +1,39 @@
+{
+  "AWSEBDOCKERrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "markgaisinsky/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "markgaisinsky/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "markgaisinsky/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "markgaisinsky/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "client",
+        "server"
+      ]
+    }
+  ]
+}

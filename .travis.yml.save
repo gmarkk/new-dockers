@@ -1,0 +1,24 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t tmpr/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run tmpr/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t markgg/multi-client ./client
+  - docker build -t markgg/multi-nginx ./nginx
+  - docker build -t markgg/multi-server ./server
+  - docker build -t markgg/multi-worker ./worker
+   
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #  push  images docker hub
+  - docker push markgaisinsky/ markgg/multi-client:latest
+  - docker push markgaisinsky/markgg/multi-nginx:latest
+  - docker push 
+markgg/multi-server:latest
+  - docker push markgg/multi-worker:latest
