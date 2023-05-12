@@ -17,7 +17,7 @@ after_success:
   - docker push markgaisinsky/multi-worker:latest
 deploy:
   provider: elasticbeanstalk
-  region: us-west-1
+  region: us-east-1
   app: mydocker
   env: Mydocker-env
   bucket_name: elasticbeanstalk-us-east-1-428770810282
